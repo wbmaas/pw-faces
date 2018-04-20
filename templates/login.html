@@ -1,0 +1,39 @@
+{% extends "main.html" %}
+
+{% block body %}
+
+    <form action="login" class="form-signin" method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Password Manager</h1>
+        <input type="text" name="usuario" class="form-control" placeholder="Username" required autofocus>
+        <input type="password" name="senha" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </form>
+
+
+    <input type="file" accept="image/*" capture="camera" id="camera">
+    <img id="frame">
+    <script>
+        var camera = document.getElementById('camera');
+        var frame = document.getElementById('frame');
+
+        camera.addEventListener('change', function (e) {
+            var file = e.target.files[0];
+            // Do something with the image file.
+            frame.src = URL.createObjectURL(file);
+        });
+    </script>
+
+    <video id="player" controls autoplay></video>
+    <script>
+        var player = document.getElementById('player');
+
+        var handleSuccess = function (stream) {
+            player.srcObject = stream;
+        };
+
+        navigator.mediaDevices.getUserMedia({video: true})
+            .then(handleSuccess);
+    </script>
+
+{% endblock %}
